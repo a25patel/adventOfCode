@@ -8,9 +8,13 @@ function paper(l,w,h){
 }
 
 function ribbon(l,w,h){
-  var min = Math.min((l+w), (w+h), (h+l));
+  var l = Number(l);
+  var w = Number(w);
+  var h = Number(h);
+  var min = Math.min(l+w, w+h, h+l);
   var cubicFt = l*w*h;
-  return (2*min + cubicFt);
+  var perimeterRibbon = 2 * min;
+  return (perimeterRibbon + cubicFt);
 }
 
 var totalWrapping =0;
