@@ -5,7 +5,7 @@ var count = 0;
 floors.forEach(function(floor){
   floor === '(' ? count++ : count--
 })
-console.log('Santa end up on floor:' + count);
+console.log('Santa ends up on floor:' + count);
 
 // Puzzle 2
 var index;

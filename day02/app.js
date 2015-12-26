@@ -1,15 +1,20 @@
 var fs = require('fs');
-var data = fs.readFileSync('./practicePuzzle.txt');
+var data = fs.readFileSync('./puzzle.txt');
 var presents = data.toString().split(/\n/g);
 
-// Find the Surface Area & Slack square feet
-function sqFeet(l,w,h){
+function paper(l,w,h){
   var min = Math.min(l*w , w*h, h*l);
   return (2*l*w + 2*w*h + 2*h*l + min);
 }
-console.log(sqFeet(2,3,4));
 
-// Split the data at the X, assign length, width, height, run sq foot function, total the wrapping paper
+function ribbon(l,w,h){
+  var min = Math.min((l+w), (w+h), (h+l));
+  var cubicFt = l*w*h;
+  return (2*min + cubicFt);
+}
+
+var totalWrapping =0;
+var totalRibbon = 0;
 presents.forEach(function(present){
   var dimensions = present.split('x');
   var l = dimensions[0];
@@ -18,6 +23,12 @@ presents.forEach(function(present){
   if (!l){
      return;
   }
-  console.log(dimensions, l, w, h);
-
+  var presentWrapping = paper(l,w,h);
+  totalWrapping += presentWrapping;
+  var presentRibbon = ribbon(l,w,h);
+  totalRibbon += presentRibbon;
 });
+console.log('The total wrapping paper needed is: ' + totalWrapping + ' square feet');
+console.log('The total ribbon needed is: ' + totalRibbon + ' feet');
+
+// Ribbon Wrong - 5045370 feet - says too high!
