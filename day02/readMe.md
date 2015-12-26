@@ -9,12 +9,6 @@ A present with dimensions 1x1x10 requires 2*1 + 2*10 + 2*10 = 42 square feet of 
 ```
 All numbers in the elves' list are in feet. How many total square feet of wrapping paper should they order?
 
-Notes:
-  [L, W, H]
-  SA = [2LW + 2WH + 2HL]
-  Extra = Lowest of LW, WH, HL
-  Total = SA and Extra
-
 <!-- Puzzle Answer: 1606483. -->
 
 --- Part Two ---

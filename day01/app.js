@@ -1,29 +1,20 @@
-var floors = require('./puzzle.txt');
-
-var array = floors.split('');
-var count = 0;
+var floors = require('./puzzle.txt').split('');
 
 // Puzzle 1
-for (var i = 0; i < array.length; i++) {
-  if (array[i] === '(') {
-    count ++;
-  }else if (array[i] === ')') {
-    count --;
-  }
-}
+var count = 0;
+floors.forEach(function(floor){
+  floor === '(' ? count++ : count--
+})
 console.log('Santa end up on floor:' + count);
 
 // Puzzle 2
-var newArray = [];
+var index;
 count = 0;
-for (var i = 0; i < array.length; i++) {
-  if (array[i] === '(') {
-    count ++;
-  }else if (array[i] === ')') {
-    count --;
+floors.forEach(function(floor){
+  floor === '(' ? count++ : count--
+  if (count === -1) {
+    index = i + 1;
+    break;
   }
-  if (count === -1 && array[i] === ')') {
-    newArray.push(i);
-  }
-}
-console.log('Santa goes into the basement on index: ' + (newArray[0] + 1));
+})
+console.log('Santa goes into the basement on index: ' + index);
