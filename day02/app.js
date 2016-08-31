@@ -34,5 +34,3 @@ presents.forEach(function(present){
 });
 console.log('The total wrapping paper needed is: ' + totalWrapping + ' square feet');
 console.log('The total ribbon needed is: ' + totalRibbon + ' feet');
-
-// Ribbon Wrong - 5045370 feet - says too high!
