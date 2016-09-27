@@ -1,11 +1,13 @@
-// 31 is too low, 274 is too high
 // Nice Rules:
 // 1. Must have double letter (aa, bb)
 // 2. Must have at least 3 vowels
 // 3. Must not contain phrases:
 //    ab, cd, pq, or xy
+
+// Answer: 258
+
 var fs = require('fs');
-var input = fs.readFileSync('./practicePuzzle.txt', 'utf8');
+var input = fs.readFileSync('./puzzle.txt', 'utf8');
 var lines = input.split('\n');
 
 // Test One: Does it have double letters?
@@ -19,7 +21,6 @@ function doubles(line){
 }
 
 lines = lines.filter(doubles);
-console.log(lines);
 
 // // Test Two: Has atleast 3 Vowels
 function vowels(line){
@@ -48,48 +49,26 @@ function vowels(line){
 }
 
 lines = lines.filter(vowels);
-console.log(lines);
-// function vowels(line){
-//   var vowelCounter = 0;
-//   line = line.split('');
-//   for (var i = 0; i < line.length; i++) {
-//     switch (line[i]) {
-//       case 'a':
-//
-//         break;
-//       default:
-//
-//     }
-//
-//   if (vowelCounter >= 3) {
-//     return "TRUE";
-//   }
-// }
-//
-// console.log(vowels('rthkunfaakmwmush'));
 
-// // Test Three:
-// // can't contain certain phrases
-// function phraseChecker(line) {
-//   if (line.indexOf('ab') != -1 ||
-//       line.indexOf('cd') != -1 ||
-//       line.indexOf('pq') != -1 ||
-//       line.indexOf('xy') != -1) {
-//         return false;
-//   }
-//
-//   return true;
-// }
-//
-//
-// // going through each line here
-// // and applying the tests
-// for(var i = 0;i < lines.length; i++){
-//   var line = lines[i];
-//
-//   if (vowelChecker(line) && doubleLetterChecker(line) &&phraseChecker(line)) {
-//     niceLineCount++;
-//   }
-// }
-//
-// console.log(niceLineCount);
+// Test Three: must not contain phrases- ab, cd, pq, or xy
+function phrases(line){
+  var phrases = 0
+  if (line.indexOf('ab') !== -1) {
+    phrases ++
+  }
+  if (line.indexOf('cd') !== -1) {
+    phrases ++
+  }
+  if (line.indexOf('pq') !== -1) {
+    phrases ++
+  }
+  if (line.indexOf('xy') !== -1) {
+    phrases ++
+  }
+  if (phrases === 0) {
+    return line
+  }
+}
+lines = lines.filter(phrases);
+console.log(lines);
+console.log(lines.length);
