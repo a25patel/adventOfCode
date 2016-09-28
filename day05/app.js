@@ -7,7 +7,7 @@
 // Answer: 258
 
 var fs = require('fs');
-var input = fs.readFileSync('./practicePuzzle.txt', 'utf8');
+var input = fs.readFileSync('./puzzle.txt', 'utf8');
 var lines = input.split('\n');
 var lines2 = input.split('\n');
 
@@ -75,13 +75,14 @@ console.log(lines.length);
 
 
 // --------------- Part Two ----------------
+// 63 is too high, 36 is too low
 // New Rules:
 // 1. Any two letters appear atleast twice. No Overlapping
 //   ie: xyxy OR aabejioeaajfioe NOT aaa (overlaps)
 // 2. Contains one letter that repeats with one letter in between
 //   ie: aya OR jfioeafajfioe
 
-// Test Two: Letter DifLetter Letter
+// Test One: Letter DifLetter Letter
 function sandwich(line){
   line = line.split('');
   for (var i = 0; i < line.length; i++) {
@@ -92,17 +93,41 @@ function sandwich(line){
 }
 
 lines2 = lines2.filter(sandwich);
-console.log(lines2);
 
-// Test One: two letters twice.
-function letters(line){
-  var count = 0;
-  var twice = line.indexOf('th');
-  while (twice !== -1) {
-    count ++
-    twice = line.indexOf('th', twice + 1)
+// Test Two: two letters twice.
+function lettersThrice(line){
+  line = line.split('')
+  for (var i = 0; i < line.length; i++) {
+    if(line[i] === line[i + 1] && line[i] === line[i + 2]){
+      line.splice(i, 1)
+    }
   }
-  return count;
+  return line.join('');
 }
 
-console.log(letters('rthkunfaakmwtmush'));
+lines2 = lines2.filter(lettersThrice);
+
+function letters(line, phrase){
+  var count = 0;
+  var twice = line.indexOf(phrase);
+  while (twice !== -1) {
+    count ++
+    twice = line.indexOf(phrase, twice + 1)
+  }
+  if (count >= 2) {
+    return count;
+  }
+}
+
+function lettersTwice(line){
+  for (var i = 0; i < line.length; i++) {
+    var phrase = line[i] + line[i + 1]
+    if (letters(line, phrase) >= 2) {
+      return line
+      break;
+    }
+  }
+}
+
+lines2 = lines2.filter(lettersTwice);
+console.log(lines2.length);
