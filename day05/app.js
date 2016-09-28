@@ -7,7 +7,7 @@
 // Answer: 258
 
 var fs = require('fs');
-var input = fs.readFileSync('./puzzle.txt', 'utf8');
+var input = fs.readFileSync('./practicePuzzle.txt', 'utf8');
 var lines = input.split('\n');
 var lines2 = input.split('\n');
 
@@ -84,29 +84,49 @@ console.log(lines.length);
 
 // Test One: Letter DifLetter Letter
 function sandwich(line){
-  line = line.split('');
   for (var i = 0; i < line.length; i++) {
     if (line[i] === line[i + 2]) {
-      return line.join('');
+      return line
     }
   }
 }
-
 lines2 = lines2.filter(sandwich);
 
-// Test Two: two letters twice.
+// Test Two: Two letters twice.
+
+// If a string with 3 same letters in a row, take out one of the letters
 function lettersThrice(line){
-  line = line.split('')
   for (var i = 0; i < line.length; i++) {
-    if(line[i] === line[i + 1] && line[i] === line[i + 2]){
-      line.splice(i, 1)
+    if (line[i] === line[i+1] && line[i] === line[i+2]) {
+      var phrase = line[i] + line[i+1] + line[i+2];
     }
   }
-  return line.join('');
+  if (phrase) {
+    var index = line.indexOf(phrase);
+    line = line.split('');
+    line.splice(index, 1);
+    line = line.join('');
+    console.log(line);
+    return line;
+  }else{
+    return line;
+  }
 }
-
 lines2 = lines2.filter(lettersThrice);
+console.log(lines2);
 
+//
+// var string =   'lactpmuhmmmzwfjl';
+// console.log(string.indexOf('mmm'));
+// string = string.split('')
+// string.splice(8, 1)
+// string = string.join('')
+// console.log(string);
+
+
+
+
+// Count how many times a phrase of two letters appear in a string
 function letters(line, phrase){
   var count = 0;
   var twice = line.indexOf(phrase);
@@ -130,4 +150,4 @@ function lettersTwice(line){
 }
 
 lines2 = lines2.filter(lettersTwice);
-console.log(lines2.length);
+// console.log(lines2.length);
